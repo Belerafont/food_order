@@ -12,6 +12,7 @@ describe User, type: :model do
     user = build(:user, organization: organization)
     expect(user.save).to eq(true)
     expect(user.admin?).to eq(true)
+
     user_second = build(:user, email: 'John@example.com', organization: organization)
     expect(user_second.save).to eq(true)
     expect(user_second.admin?).to eq(false)
