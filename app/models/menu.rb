@@ -1,3 +1,4 @@
 class Menu < ApplicationRecord
-  has_and_belongs_to_many :dish_items, class_name: 'DishItems::Base'
+  has_many :dish_item_menus
+  has_many :dish_items, through: :dish_item_menus, class_name: 'DishItems::Base'
 end

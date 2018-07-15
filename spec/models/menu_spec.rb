@@ -1,5 +1,12 @@
 require 'rails_helper'
 
-RSpec.describe Menu, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+describe Menu, type: :model do
+  context 'factory' do
+    it 'valid' do
+      expect(create(:menu)).to be_valid
+    end
+
+    it { should have_many(:dish_item_menus) }
+    it { should have_many(:dish_items) }
+  end
 end

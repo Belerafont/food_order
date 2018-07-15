@@ -8,17 +8,15 @@ describe User, type: :model do
   end
 
   it 'should first user only admin' do
-    organization = create(:organization)
-    user = build(:user, organization: organization)
+    user = build(:user)
     expect(user.save).to eq(true)
     expect(user.admin?).to eq(true)
 
-    user_second = build(:user, email: 'John@example.com', organization: organization)
+    user_second = build(:user, email: 'John@example.com')
     expect(user_second.save).to eq(true)
     expect(user_second.admin?).to eq(false)
   end
 
   it { should validate_presence_of(:name) }
-  it { should belong_to(:organization) }
 
 end

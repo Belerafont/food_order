@@ -4,7 +4,6 @@ RSpec.configure do |config|
 end
 
 describe "Users", type: :request do
-  let!(:organization) { create(:organization) }
   let!(:user) { create(:user) }
   it "post new users" do
     post user_registration_path,
