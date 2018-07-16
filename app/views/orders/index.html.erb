@@ -1,0 +1,8 @@
+
+  <% @menus_days.each do |day|%>
+    <% @menus.each do |menu| %>
+      <% if menu_for_this_day?(menu, day) %>
+        <h3><%= link_to day, fresh_menu(menu) %></h3><br>
+      <% end %>
+    <% end %>
+  <% end %>
