@@ -1,0 +1,12 @@
+<% Date::DAYNAMES.rotate(1).each  do |day_name| %>
+  <h3><%= day_name %></h3>
+  <% summ_day = 0 %>
+  <% @orders.each do |order| %>
+    <% if order.date.strftime('%A') == day_name %>
+      <% order_summ = order.dish_items.sum(:price) %>
+      <% summ_day = summ_day + order_summ %>
+      <h3><%= "Order: #{order.id}, summ#{order_summ} " %></h3>
+    <% end %>
+  <% end %>
+  <h3><%= "Amount per day: #{summ_day}" %></h3>
+<% end %>

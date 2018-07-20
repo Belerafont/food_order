@@ -1,0 +1,15 @@
+<%= form_for @menu, url: @menu.dish_items.count > 0 ? admin_menu_path(@menu) : admin_menus_path do |f| %>
+  <% 3.times do |index| %>
+    <p><%= DishItems::Base.kinds[index].first.class.name.remove('DishItems::')
+ %></p>
+    <% DishItems::Base.kinds[index].all.each do |item| %>
+      <%= check_box_tag 'dish_item_ids[]', item.id, @menu.dish_item_menus.map(&:dish_item_id).include?(item.id) %>
+      <%= item.name %>
+    <% end %>
+  <% end %>
+  <p><%= link_to 'Add Dish Item',new_admin_dish_item_path%></p>
+  <p><%= f.submit 'Create' %></p>
+<% end %>
+
+
+

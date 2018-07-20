@@ -1,0 +1,11 @@
+<%= form_for @dish_item, url: admin_dish_items_path do |f| %>
+  <h4><%= label_tag :name %>
+  <%= f.text_field :name %></h4>
+
+  <h4><%= label_tag :price %>
+  <%= f.text_field :price %></h4>
+
+  <h4><%= label :type, 'Kind'%>
+  <%= f.select :type, options_for_select([DishItems::First, DishItems::Main, DishItems::Drink].map { |kind| [kind.to_s.remove('DishItems::'), kind] })%></h4>
+  <h4><%= f.submit 'Create'%></h4>
+<% end %>

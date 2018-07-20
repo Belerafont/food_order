@@ -1,10 +1,6 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
 
-  def index
-    @menus = Menu.weekdays
-  end
-
   def new
     @menu = Menu.find_by(date: params[:format])
     @order = Order.new
@@ -15,7 +11,7 @@ class OrdersController < ApplicationController
 
   def create
     current_user.orders.create(order_params)
-    redirect_to orders_path
+    redirect_to menus_path
   end
 
   private

@@ -6,4 +6,12 @@ class Order < ApplicationRecord
 
   accepts_nested_attributes_for :dish_item_orders
 
+  scope :weekdays, -> { where('created_at >= ?', 1.week.ago) }
+
+  before_validation :get_date
+
+  def get_date
+    self.date = DateTime.now.to_date
+  end
+
 end
