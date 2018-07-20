@@ -2,28 +2,24 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @menus, @menus_days = Orders::ListService.new.call
-  end
-
-  def show
-    @menu = Orders::FetchService.new(id: params[:id]).call
-  rescue Errors::NotFound
-    raise ActionController::RoutingError.new('Not Found')
+    @menus = Menu.weekdays
   end
 
   def new
-    @menu = Orders::FetchService.new(id: Menu.last.id).call
+    @menu = Menu.find_by(date: params[:format])
     @order = Order.new
+    3.times do
+      @order.dish_item_orders.build
+    end
   end
 
   def create
-    @menu = Orders::CreateService.new(order_params, current_user).call
-  rescue Errors::Validation
-    render 'new', alert: 'Validation failed'
+    current_user.orders.create(order_params)
+    redirect_to orders_path
   end
 
   private
   def order_params
-    params.require(:order).permit(:first, :main, :drink)
+    params.require(:order).permit(dish_item_orders_attributes: [:dish_item_id])
   end
 end

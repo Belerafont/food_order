@@ -1,7 +1,7 @@
 <%= form_for @order  do |f| %>
-  <%= f.select :first, order_option_for_select_by_type(f, 'DishItems::First') %>
-  <%= f.select :main, order_option_for_select_by_type(f, 'DishItems::Main') %>
-  <%= f.select :drink, order_option_for_select_by_type(f, 'DishItems::Drink') %>
+  <%= f.fields_for :dish_item_orders do |di_f| %>
+    <% di_f.select :dish_item_id, order_option_for_select_by_type(DishItems::Base.kinds[di_f.index], @menu) %>
+  <% end %>
 
   <%= f.submit 'Create' %>
 <% end %>
