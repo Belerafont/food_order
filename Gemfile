@@ -61,9 +61,11 @@ group :test do
   gem 'database_cleaner'
   gem 'shoulda-matchers'
   gem 'rspec_junit_formatter'
+  gem 'rails-controller-testing'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'validates_timeliness'
 gem 'devise'
+gem 'carrierwave', '~> 1.0'

@@ -6,26 +6,28 @@ class Admin::MenusController < Admin::AppController
   end
 
   def create
-    menu = Menu.create!
-    add_record_to_menu(menu, menu_params[:dish_item_ids])
+    menu = Menu.new
+    new_dish_items = DishItems::Base.where(id: menu_params[:dish_item_ids])
+
+    ActiveRecord::Base.transaction do
+      menu.save!
+
+      menu.insert_dish_items!(new_dish_items.pluck(:id))
+    end
+
     redirect_to menus_path
   end
 
   def update
     menu = Menu.find(params[:id])
-    menu.dish_item_menus.destroy_all
-    add_record_to_menu(menu, menu_params[:dish_item_ids])
+    new_dish_items = DishItems::Base.where(id: menu_params[:dish_item_ids])
+
+    menu.insert_dish_items!(new_dish_items.pluck(:id))
+
     redirect_to menus_path
   end
 
   private
-
-  def add_record_to_menu(menu, item_array)
-    item_array.each do |id|
-      di = DishItems::Base.find(id)
-      menu.dish_items << di
-    end
-  end
 
   def menu_params
     params.permit(dish_item_ids:[])

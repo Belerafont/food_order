@@ -8,6 +8,8 @@ class DishItems::Base < ApplicationRecord
 
   validates :name, :price, presence: true
 
+  mount_uploader :image, ItemImageUploader
+
   def self.kinds
     [DishItems::First, DishItems::Main, DishItems::Drink]
   end

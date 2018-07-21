@@ -6,6 +6,8 @@
   <%= f.text_field :price %></h4>
 
   <h4><%= label :type, 'Kind'%>
-  <%= f.select :type, options_for_select([DishItems::First, DishItems::Main, DishItems::Drink].map { |kind| [kind.to_s.remove('DishItems::'), kind] })%></h4>
+  <%= f.select :type, dish_items_options_for_select %></h4>
+
+  <%= f.file_field :image %>
   <h4><%= f.submit 'Create'%></h4>
 <% end %>

@@ -10,6 +10,5 @@ class Admin::DishItemsController < Admin::AppController
 
   private
   def dish_item_params
-    params.require(:dish_items_base).permit(:name, :price, :type)
+    params.require(:dish_items_base).permit(:name, :price, :type, :image)
   end
-end
