@@ -18,6 +18,6 @@ class User < ApplicationRecord
   private
 
   def create_admin_if_first_user
-    self.role = User.roles['admin'] if User.count == 0
+    self.role ||= User.roles['admin'] if User.count == 0
   end
 end

@@ -4,6 +4,8 @@ class Admin::AppController < ApplicationController
 
   protected
   def authorize_admin
-    redirect_to root_path, status: 401 unless current_user.admin?
+    if current_user && !current_user.admin?
+      redirect_to root_path, alert: 'You don\'t have permission to access'
+    end
   end
 end

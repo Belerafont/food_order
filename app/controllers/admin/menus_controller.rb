@@ -15,7 +15,7 @@ class Admin::MenusController < Admin::AppController
       menu.insert_dish_items!(new_dish_items.pluck(:id))
     end
 
-    redirect_to menus_path
+    redirect_to menus_path,  notice: 'Menu successfully created'
   end
 
   def update

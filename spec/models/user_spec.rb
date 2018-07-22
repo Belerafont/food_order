@@ -8,7 +8,7 @@ describe User, type: :model do
   end
 
   it 'should first user only admin' do
-    user = build(:user)
+    user = build(:user, role: nil)
     expect(user.save).to eq(true)
     expect(user.admin?).to eq(true)
 
@@ -19,4 +19,21 @@ describe User, type: :model do
 
   it { should validate_presence_of(:name) }
 
+  shared_examples 'has_secure_token' do |attr|
+    let(:user) { build(:user) }
+
+    it 'should be generated' do
+      expect(user[attr]).to be_nil
+      expect(user.save).to eql(true)
+      expect(user[attr]).to_not be_empty
+    end
+  end
+
+  context 'public_key' do
+    include_examples 'has_secure_token', :public_key
+  end
+
+  context 'secret_key' do
+    include_examples 'has_secure_token', :secret_key
+  end
 end

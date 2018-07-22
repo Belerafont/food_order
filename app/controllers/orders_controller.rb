@@ -10,8 +10,12 @@ class OrdersController < ApplicationController
   end
 
   def create
-    current_user.orders.create(order_params)
-    redirect_to menus_path
+    order = current_user.orders.build(order_params)
+    if order.save
+      redirect_to menus_path, notice: 'Order successfully created'
+    else
+      render 'new', alert: order.errors.full_messages
+    end
   end
 
   private
