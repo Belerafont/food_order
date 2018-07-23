@@ -1,5 +1,5 @@
 class Api::AppController < ApplicationController
-  before_filter :check_auth
+  before_action :check_auth
 
   protected
   def check_auth
