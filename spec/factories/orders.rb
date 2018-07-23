@@ -6,7 +6,7 @@ FactoryBot.define do
       dif = create(:first_dish_items)
       dim = create(:main_dish_items)
       did = create(:drink_dish_items)
-    order.dish_items << [dif, dim, did]
+      order.dish_items << [dif, dim, did]
     end
   end
 end
