@@ -1,0 +1,17 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+
+development:
+  <<: *default
+  database: food_order_development
+
+test:
+  <<: *default
+  database: food_order_test
+
+production:
+  <<: *default
+  database: food_order_production
+  username: food_order
