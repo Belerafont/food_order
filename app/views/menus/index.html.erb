@@ -1,3 +1,5 @@
 <% @menus.each do |menu| %>
   <h3><%= link_to menu_day_name(menu), new_order_path(menu.date.to_date) %></h3><br>
 <% end %>
+
+<h3><%= link_to 'Create new menu', new_admin_menu_path if current_user.admin? %></h3>

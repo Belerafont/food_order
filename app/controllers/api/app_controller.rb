@@ -4,8 +4,8 @@ class Api::AppController < ApplicationController
   protected
   def check_auth
     authenticate_or_request_with_http_basic do |username,password|
-      resource = User.find_by_public_key(username)
-      resource && resource.secret_key == password
+      @current_user = User.find_by_public_key(username)
+      @current_user && @current_user.secret_key == password
     end
   end
 end
